@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ChatBotIcon from './components/ChatbotIcon/ChatbotIcon'
 import "./index.css"
+import ChatForm from './components/ChatForm/ChatForm'
+import ChatMessage from './components/ChatMessage/ChatMessage'
+
 const App = () => {
+   const [chatHistory , setChatHistory] = useState([]);
+  //  console.log(chatHistory) 
   return (
     <div className='container'>
       <div className="chatbot-popup">
@@ -23,20 +28,18 @@ const App = () => {
               hey there ✋ <br /> How can I help you today?
              </p>
             </div>
-            <div className="message user-message">
-            <ChatBotIcon />
-             <p className="message-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit veniam tenetur dicta officia perspiciatis eveniet explicabo! Facere, cumque eos?
-             </p>
-            </div>
+            {/* <ChatBotIcon /> */}
+            {/* Dynamically generate a chat here. */}
+            {
+              chatHistory.map((chat,index)=>(
+                <ChatMessage key={index} chat={chat} />
+              ))
+            }
+            
         </div>
         {/* Chatbot footer */}
         <div className="chat-footer">
-             <form action="#" className="chat-form">
-              <input type="text" placeholder='message...' className="message-input" required />
-              <button>
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/></svg></button>
-             </form>
+             <ChatForm setChatHistory={setChatHistory} />
         </div>
       </div>
     </div>
